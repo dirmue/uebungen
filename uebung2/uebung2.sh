@@ -31,8 +31,8 @@ for i in {2..3}; do
 done
 
 connect_netns "BRIDGE1" "BRIDGE2" "port3" "port3"
-br_add_if "br0" "port2" "BRIDGE1"
-br_add_if "br0" "port2" "BRIDGE2"
+br_add_if "br0" "port3" "BRIDGE1"
+br_add_if "br0" "port3" "BRIDGE2"
 
 echo -n "Warte bis alle Terminals geschlossen sind..."
 wait

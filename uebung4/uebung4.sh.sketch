@@ -1,0 +1,22 @@
+IPv4 Routing mit 2 Routern
+--------------------------
+
+  +-------+                       +-------+
+  |  R 1 -+-----------------------+- R 2  |
+  +---|---+                       +---|---+
+      |                               |
+  +---|---+                       +---|---+
+  | o o o |Bridge 1               | o o o |Bridge 2
+  +-|---|-+                       +-|---|-+
+    |   +-------+           +-------+   |
+    |           |           |           |
+  +-|-+       +-|-+       +-|-+       +-|-+
+  |   |       |   |       |   |       |   |
++-+---+-+   +-+---+-+   +-+---+-+   +-+---+-+
+|_______|   |_______|   |_______|   |_______|
+Client 1    Client 2    Client 3    Client 4
+
+
+Aufgabe: Konfiguriere die Router und Clients so, dass jede Bridge ein separates 
+         IPv4-Netz verbindet und stelle sicher, dass alle Systeme sich erreichen
+         können.

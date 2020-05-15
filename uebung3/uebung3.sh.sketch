@@ -1,0 +1,32 @@
+                                    
+                                    
+                                    
+Bridge 0                              
++-------------+                 
+| +---+ +---+ |                 
+| | 0 | | 1 | |
+| +-|-+ +-|-+ |                 
++---|-----|---+                   
+    |     |                   2                         
+    |     +---------------------------------------+    
+  4 |                                             |     
+    |                                             |     
+    |                                             |     
++---|---------------+                   +---------|---------+
+| +-|-+ +---+ +---+ |                   | +---+ +-|-+ +---+ |
+| | 0 | | 1 | | 2 +-----------------------+ 0 | | 1 | | 2 | |
+| +---+ +-|-+ +---+ |         8         | +---+ +---+ +-|-+ |
++---------|---------+                   +---------------|---+
+Bridge 1  |                             Bridge 2        |
+     +----|-----+                                  +----|-----+
+     | Client 1 |                                  | Client 2 |
+     +----------+                                  +----------+
+
+
+Aufgaben:
+
+1) Finde heraus welche Bridge zur Route Bridge gewählt wurde und warum.
+2) Finde die Port-Rollen heraus.
+3) Kann so eine Konfiguration sinnvoll sein? Warum (nicht)?
+4) Sorge dafür, dass eine andere Bridge zur Root-Bridge wird.
+5) Was passiert wenn STP deaktiviert wird?

@@ -1,0 +1,66 @@
+#!/bin/bash
+
+. ../lib/virtnet.sh
+
+add_netns "BRIDGES"
+
+for i in {0..3}; do
+    add_br "br$i" "BRIDGES"
+#    run_cmd_in_netns "brctl stp br$i on" "BRIDGES"
+done
+open_term_netns "BRIDGES" "BRIDGES"
+
+run_cmd_in_netns "ip link add name br0p0 type veth peer br2p0" "BRIDGES"
+run_cmd_in_netns "ip link add name br0p2 type veth peer br1p0" "BRIDGES"
+run_cmd_in_netns "ip link add name br0p1 type veth peer br3p1" "BRIDGES"
+run_cmd_in_netns "ip link add name br1p2 type veth peer br3p2" "BRIDGES"
+run_cmd_in_netns "ip link add name br2p2 type veth peer br3p0" "BRIDGES"
+
+
+add_netns "CLIENT1"
+add_netns "CLIENT2"
+connect_netns "BRIDGES" "CLIENT1" "br1p1" "eth0"
+connect_netns "BRIDGES" "CLIENT2" "br2p1" "eth0"
+
+open_term_netns "CLIENT1" "CLIENT1"
+open_term_netns "CLIENT2" "CLIENT2"
+run_cmd_in_netns "sysctl net.ipv6.conf.all.disable_ipv6=1" "CLIENT1"
+run_cmd_in_netns "sysctl net.ipv6.conf.all.disable_ipv6=1" "CLIENT2"
+
+for i in {0..3}; do
+	run_cmd_in_netns "sysctl net.ipv6.conf.all.disable_ipv6=1" "BRIDGES"
+	for p in {0..2}; do
+		br_add_if "br$i" "br${i}p$p" "BRIDGES"
+		run_cmd_in_netns "ip link set up dev br${i}p$p" "BRIDGES"
+	done
+done
+
+run_cmd_in_netns "bridge link set cost 8 dev br0p0" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 9 dev br0p1" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 10 dev br0p2" "BRIDGES"
+
+run_cmd_in_netns "bridge link set cost 10 dev br1p0" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 5 dev br1p2" "BRIDGES"
+
+run_cmd_in_netns "bridge link set cost 8 dev br2p0" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 8 dev br2p2" "BRIDGES"
+                                                           
+run_cmd_in_netns "bridge link set cost 8 dev br3p0" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 9 dev br3p1" "BRIDGES"
+run_cmd_in_netns "bridge link set cost 5 dev br3p2" "BRIDGES"
+
+add_ip "192.168.0.1/24" "eth0" "CLIENT1"
+add_ip "192.168.0.2/24" "eth0" "CLIENT2"
+
+for i in {0..3}; do
+    run_cmd_in_netns "ip link set up dev br$i" "BRIDGES"
+done
+
+echo -n "Warte bis alle Terminals geschlossen sind..."
+wait
+
+del_netns "BRIDGES"
+del_netns "CLIENT1"
+del_netns "CLIENT2"
+
+echo "BYE!"

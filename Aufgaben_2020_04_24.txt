@@ -1,0 +1,112 @@
+1) Folgende Switche sind redundant verbunden. STP ist auf allen Switchen
+aktiviert.
+                    +-------------+
+                 SW1| O 1 2 3 4 5 | id=8000.123456111123
+           4        +-|-|-------|-+
+  +-------------------+ |       |         
+  |                     |       |      4
+  |                     |       +--------------+
+  | id=8000.12345611111 |                      |
++-+-----------+         |                    +-|-----------+
+| O 1 2 3 4 5 |SW2      |                    | O 1 2 3 4 5 |SW5
++---|---------+         |19                  +---|---------+
+    |                   |                        | id=8000.123456cc23cc1d
+    |                   |                        |
+    | 4     +-----------+                        | 4
+    |       |                                    | 
+    |       |                                    |
+    |       |                         +----------+
+    +-----+ | id=8000.234567ab1234    |
+        +-|-|---------+         +-----|-------+
+        | O 1 2 3 4 5 |SW3      | O 1 2 3 4 5 |SW4
+        +-----|-------+         +---|---------+
+              |                     | id=8000.12345645ad23
+              +---------------------+
+                         1
+
+a) Bestimme die Root-Bridge.
+b) Bestimme die Portrollen
+
+Gib deinen Lösungsweg an. (Hinweis: die Zahlen innerhalb der Switche sind die
+Portnummern und entsprechen gleichzeitig der Portpriorität)
+
+
+
+2) Wie kann in folgenden Netzwerken folgendes sichergestellt werden?
+
+Hosts an einem gemeinsamen Switch sollen direkt miteinander kommunizieren, aber
+die Hosts am jeweils anderen Switch nicht erreichen können. Alle Hosts sollen
+Server E erreichen und nutzen können.
+
+a)
+
+Host      Host          Host      Host  
++---+     +---+         +---+     +---+
+| A |     | B |         | C |     | D |
++-+-+     +-+-+         +-+-+     +-+-+
+--+--     --+--         --+--     --+--
+  |         |             |         |
+  | +-------+             +-------+ |
++-|-|---------+         +---------|-|-+
+| O 1 2 3 4 5 |SW1      | O 1 2 3 4 5 |SW2
++-----------|-+         +-|-----------+
+            +-+ +---------+
+              | |                +---+
+            +-|-|---------+      | - |
+            | O 1 2 3 4 5 |SW3   | - |  Server E
+            +-----------|-+      |   |
+                        |       -+-|-+-
+                        |          |
+                        +----------+
+                        
+b)
+
+Host          Host    Host          Host      
++---+         +---+   +---+         +---+
+| A |         | B |   | C |         | D |
++-+-+         +-+-+   +-+-+         +-+-+
+--+--         --+--   --+--         --+--
+  |             |       |             |                    
+  +------+ +----+       +----+ +------+
+       +-|-|---------+     +-|-|---------+
+   SW1 | O 1 2 3 4 5 |     | O 1 2 3 4 5 | SW2
+       +-----|-----|-+     +-----------|-+
+             |     +-------------------+
+ +---+       |           
+ | - |       |           
+ | - |       |
+ |   |       |
+-+-|-+-      |
+   +---------+
+Server E
+
+Gib für a) und b) an, wie du die Ports der Switche SW1 bis SW3 konfigurieren 
+würdest und begründe deine Entscheidung.
+
+        
+     
+3) Welchen Nachteil hat die Konfiguration von Link Aggregation ohne eine
+Protokoll wie bspw. LACP?
+
+
+
+4) Wie viele nutzbare Adressen hat das IPv4-Netz 185.12.64.0/22?
+
+
+
+5) Wie lautet die CIDR-Notation der Subnetzmaske 255.255.240.0?
+
+
+
+6) In wie viele /27-Netze kann das Netz 213.239.192.0/18 unterteilt werden? Gib
+die Netzadresse der ersten beiden Subnetze an.
+
+
+
+7) Wie lautet die Broadcast-Adresse für einen Server mit der IP-Adresse
+94.130.15.37 und der Subnetzmaske 255.255.255.240?
+
+
+
+8) Nenne Netzadresse und Subnetzmaske des kleinsten Subnetzes, in dem die
+IPv4-Adressen 94.130.122.17 und 94.130.122.22 beide enthalten sind.

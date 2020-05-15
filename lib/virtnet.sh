@@ -242,7 +242,7 @@ run_cmd_in_netns()
 {
     if [ -n "$1" ] && [ -n "$2" ]
     then
-        $IP netns exec $2 $1
+        $IP netns exec $2 $1 &>/dev/null
         return $?
     else
         return 1

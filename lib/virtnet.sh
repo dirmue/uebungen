@@ -7,7 +7,7 @@
 export STDTERM="xterm"
 export TOPT_EXEC="-e"
 export TOPT_TITLE="-T"
-export TOPT_ADD="-fa Monospace -fs 10"
+export TOPT_ADD="-fa Monospace -fs 16"
 
 export IP=$(which ip)
 export TC=$(which tc)
@@ -62,6 +62,8 @@ add_netns()
     then
         $IP netns add $1
         set_up_in_netns "lo" $1
+		run_cmd_in_netns "sysctl net.ipv4.conf.default.ignore_routes_with_linkdown=1" $1
+		run_cmd_in_netns "sysctl net.ipv4.conf.all.ignore_routes_with_linkdown=1" $1
         return $?
     else
         return 1

@@ -1,10 +1,6 @@
 IPv4 Routing mit 3 Routern und redundanten Routen
 -------------------------------------------------
-
-                 10.0.1.0/29
-       _______________A_______________
-      /                               \
-              eth0+-------+eth1            
+10.0.0.4/30   eth0+-------+eth1   10.0.0.8/30
       +-----------+- R 3 -+-----------+
       |           +-------+           |
   eth2|                               |eth2
@@ -26,9 +22,6 @@ Client 0     Client 1   Client 2     Client 3
           V                       V
    192.168.64.0/24         192.168.128.0/24
 
-
-Aufgabe: Konfiguriere die Schnittstellen der Clients und Router entsprechend der
-         Vorgaben, wähle geeignete IP-Adressen für alle Schnittstellen und lege 
-         entsprechende Routen an. Konfiguriere Routen über R3 so, dass diese nur
-         genutzt werden, wenn die Verbindung zwischen R1 und R2 unterbrochen 
-         ist. Prüfe das Ergebnis, in dem du eth1 an R1 oder R2 auf "down" setzt.
+Aufgabe: Lege die fehlenden Routen an. Konfiguriere Routen über R3 so, dass 
+         diese nur genutzt werden, wenn die Verbindung zwischen R1 und R2 
+         unterbrochen ist.

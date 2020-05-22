@@ -371,6 +371,11 @@ check_installed "ip"
 check_installed "bash"
 check_installed "brctl"
 check_installed "$STDTERM"
+sysctl net.ipv4.ip_fowarding=1
+sysctl net.ipv4.conf.all.fowarding=1
+sysctl net.ipv4.conf.default.fowarding=1
+sysctl net.ipv6.conf.all.fowarding=1
+sysctl net.ipv6.conf.default.fowarding=1
 clear
 
 # If an ascii network sketch exists, show it
